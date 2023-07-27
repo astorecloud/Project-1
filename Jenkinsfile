@@ -3,7 +3,35 @@ pipeline
     agent any
 
     stages 
-    {
+    {   
+         stage ('Stop Container') 
+        {
+            steps 
+            {
+               script{
+                    sh 'docker stop html2'
+                }
+            }
+        }
+        
+        stage ('Remove Container') 
+        {
+            steps 
+            {
+                script {
+                    sh 'docker rm html2'
+                }
+            }
+        }
+         stage ('Remove Container Image') 
+        {
+            steps 
+            {
+                script {
+                    sh 'docker rmi html2 '
+                }
+            }
+        }
         stage ('Build docker image') 
         {
             steps 
